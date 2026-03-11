@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: foyer-config
+  namespace: devops
+data:
+  SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/foyerdb?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+  SPRING_DATASOURCE_USERNAME: foyeruser
+  SERVER_PORT: "8089"

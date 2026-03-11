@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: foyer-app
+  namespace: devops
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: foyer-app
+  template:
+    metadata:
+      labels:
+        app: foyer-app
+    spec:
+      containers:
+        - name: foyer-app
+          image: chaymadevops/foyer-app:latest
+          ports:
+            - containerPort: 8089
+          env:
+            - name: SPRING_DATASOURCE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: foyer-config
+                  key: SPRING_DATASOURCE_URL
+            - name: SPRING_DATASOURCE_USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: foyer-config
+                  key: SPRING_DATASOURCE_USERNAME
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: foyer-secret
+                  key: SPRING_DATASOURCE_PASSWORD
+            - name: SERVER_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: foyer-config
+                  key: SERVER_PORT
