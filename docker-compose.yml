@@ -1,0 +1,8 @@
+version: '3.8'
+
+services:
+  foyer-app:
+    build: .
+    container_name: foyer-app
+    ports:
+      - "8089:8089"
